@@ -1,7 +1,6 @@
-###in part C module ihave choosen the biodiversity of mammalian taxonomic group. it has different orders and im interested in records of counntry and the number of orders in the data set, to reduce the selected data set and plot graph of reduced data.
-install.packages("tidyverse")
+###In part C module, I have chosen the biodiversity of mammalian taxonomic group. It has different orders and I'm interested in records of country, the number of orders in the data set, to reduce the selected data set and plot graph of reduced data.
 library(tidyverse)
-install.packages("dplyr")
+#Removed install.packages for tidyverse and dplyr as it is not needed.
 Assignmentdata <- read.delim("bold_data.txt")
 #to check records per country
 countries.count <-Assignmentdata %>%
@@ -12,13 +11,13 @@ countries.count <-Assignmentdata %>%
 #plot a histogram of the order_taxID
 hist(Assignmentdata$order_taxID)
 #to reduce the families
-top.families <- Assignment1data %>%
+top.families <- Assignmentdata %>% #Originally written as Assignment1data. Removed the 1 as it was inconsistent with previous objects names.
   group_by(family_name) %>%
   mutate(count_by_family = length(processid)) %>%
-  filter(count_by_family > 120 )
+  filter(count_by_family > 120 ) 
 #to check remaining family records
 length(top.families$family_name)
-#tocheck unique family name
+#to check unique family name
 unique(top.families$family_name)
 #plot graph of family and count of family
 plot(as.factor(top.families$family_name), top.families$count_by_family)
@@ -31,8 +30,7 @@ commAssign1 <- specaccum(comm = n, method = "exact", permutations = 100,conditio
 library(dplyr)
 commAssign1 <- spread(comm,bin_uri, n)
 #using iNext package
-install.packages("iNext")
-library(iNEXT)
+library(iNEXT) #Removed install.packages(iNEXT)
 g <-ggplot2::aes(top.families$family_name,top.families$count_by_family)
 g1<-ggplot2::aes(Assignmentdata$species_name,Assignmentdata$species_taxID)
 g1
